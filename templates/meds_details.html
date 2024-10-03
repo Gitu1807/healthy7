@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+    <div class="roe mt-3">
+        <div class="col-md-9 mx-auto">
+            <br><br>
+
+            <div class="row">
+                {% for x in data %}
+                <div class="col-md-5">
+                    <img style="height: 300px; width: auto; " src="{{x.cimage.url}}" class="card-img-top" alt="...">
+                </div>
+                <div class="col-md-7">
+                    {% if msg %}
+                        <div class="alert alert-success">
+                            {{msg}}
+                        </div>
+                    {% endif %}
+
+                    {% if errmsg %}
+                        <div class="alert alert-dark">
+                            {{errmsg}}
+                        </div>
+                    {% endif %}
+                    <br>
+                    <p><b>Product :</b> {{x.name}}</p>
+                    <br>
+                    <p><b>Details :</b> {{x.cdetail}}</p>
+                    <br>
+                    {% if x.cat == 1 %}
+                        <p><b>Category :</b>Personal Care</p>
+                    {% elif x.cat == 2 %}
+                        <p><b>Category :</b>Health Care Devices</p>
+                    {% elif x.cat == 3 %}
+                        <p><b>Category :</b>Skin Care</p>
+                    {% elif x.cat == 4 %}
+                        <p><b>Category :</b>Fitness Supplement</p>
+                    {% elif x.cat == 5 %}
+                        <p><b>Category :</b>Ayurvedic Care</p>
+                    {% else %}
+                        <p><b>Category :</b>Health Care</p>
+                    {% endif %}
+                    <br>
+                    <p><b>Price :</b>₹ {{x.price}}</p>
+                    <br><br>
+                    <p>
+                        <a href="/addtocart/{{x.id}}" class="btn btn-primary" style="margin-right: 1cm ; color: white;">Buy Now</a>
+                        <a href="/orders" class="btn btn-primary" style="color: white;">View Cart</a>
+                        <br><br>
+                        <br><br><br><br>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock 'main' %}

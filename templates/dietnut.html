@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div style="background-image: url('https://images.pexels.com/photos/952479/pexels-photo-952479.jpeg');background-size: cover; background-position: center; padding: 50px 0;" >
+<div style="max-width: 800px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+        <h2 style="text-align: center; color: #333;">Diet and Nutrition Analysis</h2>
+        <form id="nutritionForm">
+            <div style="margin-bottom: 15px;">
+                <label for="age" style="display: block; margin-bottom: 5px; color: #555;">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age (e.g., 25)" name="age" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <br>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <label for="gender" style="margin-right: 20px; color: #555;">Gender:</label>
+                <select id="gender" name="gender" required style="width: auto; padding: 10px; margin-right: 20px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label for="activity" style="margin-left: 20px; color: #555;">Activity Level:</label>
+                <select id="activity" name="activity" required style="width: auto; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Activity Level</option>
+                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                    <option value="light">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                    <option value="moderate">Moderate Activity (moderate exercise/sports 3-5 days/week)</option>
+                    <option value="active">Active (hard exercise/sports 6-7 days a week)</option></option>
+                </select>
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="weight"  style="display: block; margin-bottom: 5px; color: #555;">Weight (kg):</label>
+                <input type="number" placeholder="Enter your weight in kilograms (e.g., 70)" id="weight" name="weight" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="height" style="display: block; margin-bottom: 5px; color: #555;">Height (cm):</label>
+                <input type="number" placeholder="Enter your height in centimeters (e.g., 170)" id="height" name="height" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="diet" style="display: block; margin-bottom: 5px; color: #555;">Diet Description:</label>
+                <textarea id="diet" placeholder="Describe your typical daily diet (e.g., breakfast, lunch, dinner, snacks, beverages)" name="diet" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+            <button class="btn" type="button" onclick="analyzeDiet()" style="display: block; width: 100%; padding: 10px;  color: #fff; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Analyze</button>
+        </form>
+        <div id="result" style="display:none; margin-top: 20px; padding: 15px; border-radius: 5px;  color: #333;"></div>
+    </div>
+</div>
+    <script>
+        function analyzeDiet() {
+            var age = document.getElementById('age').value;
+            var gender = document.getElementById('gender').value;
+            var weight = document.getElementById('weight').value;
+            var height = document.getElementById('height').value;
+            var activity = document.getElementById('activity').value;
+            var diet = document.getElementById('diet').value;
+
+            var bmr, calories;
+
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            switch (activity) {
+                case 'sedentary':
+                    calories = bmr * 1.2;
+                    break;
+                case 'light':
+                    calories = bmr * 1.375;
+                    break;
+                case 'moderate':
+                    calories = bmr * 1.55;
+                    break;
+                case 'active':
+                    calories = bmr * 1.725;
+                    break;
+                default:
+                    calories = bmr * 1.2;
+            }
+
+            var result = document.getElementById('result');
+            result.innerHTML = '<h3 style="margin-bottom: 10px;">Analysis Result</h3>' +
+                               '<p>Based on the information provided, your estimated daily caloric needs are <strong>' + Math.round(calories) + ' calories</strong>.</p>' +
+                               '<p><strong>Diet Description:</strong> ' + diet + '</p>';
+            result.style.display = 'block';
+        }
+    </script>
+
+
+{% endblock 'main' %}

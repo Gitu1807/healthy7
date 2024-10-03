@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div style="background-image: url('https://images.pexels.com/photos/3585034/pexels-photo-3585034.jpeg');background-size: cover; background-position: center; padding: 50px 0;" >
+    <br>
+    <div style="max-width: 800px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+        
+<h1 style="text-align: center; color: #333;">Mental Health Exercises</h1>
+<br><br>
+    <div style="text-align: center; " class="exercise">
+        <h2>Deep Breathing Exercise</h2>
+        <p>Take a deep breath in through your nose, hold it for a few seconds, and then exhale slowly through your mouth. Repeat several times.</p>
+    </div>
+    <br>
+
+    <div style="text-align: center; " class="exercise">
+        <h2>Progressive Muscle Relaxation</h2>
+        <p>Tense each muscle group in your body for 5-10 seconds, then release and relax. Start with your toes and work your way up to your head.</p>
+    </div>
+    <br>
+
+    <div style="text-align: center; " class="exercise">
+        <h2>Mindfulness Meditation</h2>
+        <p>Focus on your breath or a specific object, and gently bring your attention back whenever your mind starts to wander.</p>
+    </div>
+    <br>
+
+    <div style="text-align: center; " class="exercise">
+        <h2>Gratitude Journaling</h2>
+        <p>Write down three things you're grateful for each day to cultivate a positive outlook and appreciation for the present moment.</p>
+    </div>
+    <br>
+
+    <div style="text-align: center; " class="exercise">
+        <h2>Physical Activity</h2>
+        <p>Engage in regular exercise or physical activity to boost your mood, reduce stress, and improve overall mental well-being.</p>
+    </div>
+    <br>
+
+    <!-- Fun Game for Mental Health Exercise -->
+    <div style="text-align: center; " class="game">
+        <h2>Fun Game: Spot the Difference</h2>
+        <img src="https://i.pinimg.com/originals/a0/24/cc/a024ccbab3067cb0e0f8802d2e9eb7d2.jpg" alt="Spot the Difference Image">
+        <p>Can you spot all the differences in the two images?</p>
+        <button class="btn" onclick="startGame()">Start Game</button>
+    </div>
+    </div>
+</div>
+
+    <script>
+        function startGame() {
+            // Add logic for the game
+            alert("Game started! Spot the differences and enjoy exercising your brain.");
+        }
+    </script>
+{% endblock 'main' %}

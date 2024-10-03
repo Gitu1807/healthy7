@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+<div class="container-fluid p-0 mb-5">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="{% static 'img/meds3.jpg' %}" alt="Image">
+                <div class="carousel-caption text-center">
+                    <div class="container">
+                        <div class="row justify-content-center text-align">
+                            <a href="#"><h2 class="m-0"><span class="text-decoration-color" style="color: aliceblue;"><b><i>My</i></span>CART</b></h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row shadow m-3 rounded mt-5">
+    {% if data %}
+    <div style="margin-top: 30px;">
+
+        <h4 style="padding: 30PX;">Hello {{ user.username }} , your cart is given below:</h4>
+    </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+
+
+
+            <th scope="col">Products Name</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        {% endif %}
+        <tbody>
+
+
+          <tr>
+
+            {% if data %}
+            {% for x in data %}
+            <td>{{x.pid.name}}</td>
+            <td><div class="col md-5" style="justify-content: center;">
+                <img style=" height: auto; width: 100px;" src="{{x.pid.cimage.url}}" class="card-img-top">
+            </div></td>
+            <td>{{x.pid.price}}</td>
+            <td>
+
+                <form action="/remove/{{x.id}}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% if messages %}
+<div class="alert alert-info" role="alert">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+<div class="row mb-3 d-flex justify-content-center">
+
+        <p><strong>Total items : </strong> {{n}} items </p>
+        <p><strong>Total price:</strong> Rs. {{total}}</p>
+        <p> <div style="margin-left: 50px;">
+            <a  href="/placeorder">
+                <button class="btn btn-outline-primary">Buy Now</button></a>
+
+            </p>
+</div>
+
+</div>
+
+
+{% else %}
+<div class="row mb-3 d-flex justify-content-center w-100">
+    <h4 >Oops.. there is nothing here.!</h4>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+
+
+</div>
+
+{% endif %}
+
+{% endblock 'main' %}

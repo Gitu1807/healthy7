@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+    <div class="container"> <br>
+        <h3 style="text-align: center;">Mental Health Assessment Test</h3> <br>
+        <form id="assessmentForm" style="text-align: justify">
+            <div class="question">
+                <label> <b>1. How often have you felt down, depressed, or hopeless in the past two weeks?</b></label>
+                <br>
+                <label><input type="radio" name="q1" value="0"> Not at all</label>
+                <label><input type="radio" name="q1" value="1"> Several days</label>
+                <label><input type="radio" name="q1" value="2"> More than half the days</label>
+                <label><input type="radio" name="q1" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>2. How often have you felt little interest or pleasure in doing things in the past two weeks?</b></label> <br>
+                <label><input type="radio" name="q2" value="0"> Not at all</label>
+                <label><input type="radio" name="q2" value="1"> Several days</label>
+                <label><input type="radio" name="q2" value="2"> More than half the days</label>
+                <label><input type="radio" name="q2" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label> <b>3. How often have you felt nervous, anxious, or on edge in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q3" value="0"> Not at all</label>
+                <label><input type="radio" name="q3" value="1"> Several days</label>
+                <label><input type="radio" name="q3" value="2"> More than half the days</label>
+                <label><input type="radio" name="q3" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>4. How often have you felt unable to stop or control worrying in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q4" value="0"> Not at all</label>
+                <label><input type="radio" name="q4" value="1"> Several days</label>
+                <label><input type="radio" name="q4" value="2"> More than half the days</label>
+                <label><input type="radio" name="q4" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>5. How often have you felt tired or had little energy in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q5" value="0"> Not at all</label>
+                <label><input type="radio" name="q5" value="1"> Several days</label>
+                <label><input type="radio" name="q5" value="2"> More than half the days</label>
+                <label><input type="radio" name="q5" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>6. How often have you felt bad about yourself or felt that you are a failure or have let yourself or your family down in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q6" value="0"> Not at all</label>
+                <label><input type="radio" name="q6" value="1"> Several days</label>
+                <label><input type="radio" name="q6" value="2"> More than half the days</label>
+                <label><input type="radio" name="q6" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>7. How often have you had trouble concentrating on things, such as reading the newspaper or watching television in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q7" value="0"> Not at all</label>
+                <label><input type="radio" name="q7" value="1"> Several days</label>
+                <label><input type="radio" name="q7" value="2"> More than half the days</label>
+                <label><input type="radio" name="q7" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>8. How often have you moved or spoken so slowly that other people could have noticed, or the opposite – being so fidgety or restless that you have been moving around a lot more than usual in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q8" value="0"> Not at all</label>
+                <label><input type="radio" name="q8" value="1"> Several days</label>
+                <label><input type="radio" name="q8" value="2"> More than half the days</label>
+                <label><input type="radio" name="q8" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>9. How often have you thought that you would be better off dead, or of hurting yourself in some way in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q9" value="0"> Not at all</label>
+                <label><input type="radio" name="q9" value="1"> Several days</label>
+                <label><input type="radio" name="q9" value="2"> More than half the days</label>
+                <label><input type="radio" name="q9" value="3"> Nearly every day</label>
+            </div>
+            <div class="question">
+                <label><b>10. How often have you felt irritable or angry in the past two weeks?</b></label><br>
+                <label><input type="radio" name="q10" value="0"> Not at all</label>
+                <label><input type="radio" name="q10" value="1"> Several days</label>
+                <label><input type="radio" name="q10" value="2"> More than half the days</label>
+                <label><input type="radio" name="q10" value="3"> Nearly every day</label>
+            </div>
+            <div class="submit-button" style="text-align: right;">
+                <button class="btn" type="button" onclick="calculateResult()">Submit</button>
+            </div> 
+        </form>
+        <div style="text-align: right; text-decoration-color: blue;" id="result" class="result"></div>
+    </div>
+<br><br><br>
+    <script>
+        function calculateResult() {
+            var form = document.getElementById('assessmentForm');
+            var resultDiv = document.getElementById('result');
+            var score = 0;
+            var totalQuestions = 10;
+
+            for (var i = 1; i <= totalQuestions; i++) {
+                var radios = form['q' + i];
+                for (var j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        score += parseInt(radios[j].value);
+                        break;
+                    }
+                }
+            }
+
+            var message = '';
+            if (score <= 10) {
+                message = 'Your mental health seems to be in a good state.';
+            } else if (score <= 20) {
+                message = 'You may be experiencing some mild mental health issues. Consider speaking with a mental health professional. ';
+            } else if (score <= 30) {
+                message = 'You may be experiencing moderate mental health issues. It is recommended to consult a mental health professional.';
+            } else {
+                message = 'You may be experiencing significant mental health issues. It is highly recommended to consult a mental health professional.';
+            }
+
+            resultDiv.innerHTML = '<p>Your Score: ' + score + '</p><p>' + message + '</p>';
+        }
+    </script>
+{% endblock 'main' %}

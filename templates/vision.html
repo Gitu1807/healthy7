@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div style="background-image: url('https://images.pexels.com/photos/7078692/pexels-photo-7078692.jpeg');background-size: cover; background-position: center; padding: 50px 0;" >
+    <div style="max-width: 800px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+    <h2 style="text-align: center; color: #333;">Color Blindness Test</h2>
+    <form id="colorBlindnessForm" style="margin-top: 20px;">
+        <!-- Question 1 -->
+        <div style="margin-bottom: 30px;">
+            <div style="text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Ishihara_1.PNG/640px-Ishihara_1.PNG" alt="Color Blindness Test 1" style="max-height: 500px; height: auto; border-radius: 5px; ">
+            </div>
+            <label for="question1" style=" display: block; margin-bottom: 5px; color: #555; margin-top: 10px;">What number do you see in the above image?</label>
+            <select id="question1" name="question1" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="">Select an answer</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="16">16</option>
+            </select>
+        </div>
+        <br><br>
+        <!-- Question 2 -->
+        <div style="margin-bottom: 30px;">
+            <div style="text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Ishihara_23.PNG/640px-Ishihara_23.PNG" alt="Color Blindness Test 2" style="max-height: 500px; height: auto; border-radius: 5px; ">
+            </div>
+            <label for="question2" style="display: block; margin-bottom: 5px; color: #555; margin-top: 10px;">What number do you see in the above image?</label>
+            <select id="question2" name="question2" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="">Select an answer</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="42">42</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+        <br><br>
+        <!-- Question 3 -->
+        <div style="margin-bottom: 30px;">
+            <div style="text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Ishihara_11.PNG/640px-Ishihara_11.PNG" alt="Color Blindness Test 3" style="max-width: 500px; height: auto; border-radius: 5px; ">
+            </div>
+            <label for="question3" style="display: block; margin-bottom: 5px; color: #555; margin-top: 10px;">What number do you see in the image?</label>
+            <select id="question3" name="question3" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="">Select an answer</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="12">12</option>
+            </select>
+        </div>
+        <br><br>
+        <!-- Question 4 -->
+        <div style="margin-bottom: 30px;">
+            <div style="text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ishihara_9.png/900px-Ishihara_9.png" alt="Color Blindness Test 4" style="max-width: 500px; height: auto; border-radius: 5px; ">
+            </div>
+            <label for="question4" style="display: block; margin-bottom: 5px; color: #555; margin-top: 10px;">What number do you see in the above image?</label>
+            <select id="question4" name="question4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="">Select an answer</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="74">74</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+        <br><br>
+        <!-- Question 5 -->
+        <div style="margin-bottom: 30px;">
+            <div style="text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Ishihara_19.PNG/640px-Ishihara_19.PNG" alt="Color Blindness Test 5" style="max-width: 500px; height: auto; border-radius: 5px; ">
+            </div>
+            <label for="question5" style="display: block; margin-bottom: 5px; color: #555; margin-top: 10px;">What number do you see in the above image?</label>
+            <select id="question5" name="question5" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <option value="">Select an answer</option>
+                <option value="2">2</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <button class="btn" type="button" onclick="checkAnswers()" style="display: block; width: 100%; padding: 10px;  color: #fff; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Submit</button>
+    </form>
+    <div id="result" style="display:none; margin-top: 20px; padding: 15px; border-radius: 5px; color: #333;"></div>
+</div>
+</div>
+<script>
+    function checkAnswers() {
+        var answers = [
+            { question: 'question1', correct: '12' },
+            { question: 'question2', correct: '42' },
+            { question: 'question3', correct: '6' },
+            { question: 'question4', correct: '74' },
+            { question: 'question5', correct: '2' },
+            
+        ];
+
+        var correctCount = 0;
+        var result = document.getElementById('result');
+
+        for (var i = 0; i < answers.length; i++) {
+            var answer = document.getElementById(answers[i].question).value;
+            if (answer === answers[i].correct) {
+                correctCount++;
+            }
+        }
+
+        if (correctCount >= 4) {
+            result.innerHTML = '<h3 style="margin-bottom: 10px;">Result</h3><p>Great! You have normal color vision.</p>';
+            result.style.backgroundColor = '#d4edda';
+            result.style.color = '#155724';
+        } else {
+            result.innerHTML = '<h3 style="margin-bottom: 10px;">Result</h3><p>It seems you may have a color vision deficiency. Consider consulting an eye care professional.</p>';
+            result.style.backgroundColor = '#f8d7da';
+            result.style.color = '#721c24';
+        }
+        result.style.display = 'block';
+    }
+</script>
+{% endblock 'main' %}

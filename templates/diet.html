@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div style="background-image: url('https://images.pexels.com/photos/6550811/pexels-photo-6550811.jpeg');background-size: cover; background-position: center; padding: 50px 0;" >
+    <div style="max-width: 800px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+
+    <h2 style="text-align: center; color: #333;">Meal Planner</h2>
+    <form id="dietForm" onsubmit="addMeal(event)" style="margin-top: 20px;">
+        <div style="margin-bottom: 15px;">
+            <label for="meal" style="display: block; margin-bottom: 5px; color: #555;">Meal:</label>
+            <input type="text" placeholder="Enter the name of the meal (e.g., Breakfast)" id="meal" name="meal" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="calories" style="display: block; margin-bottom: 5px; color: #555;">Calories:</label>
+            <input type="number" placeholder="Enter the calories for this meal (e.g., 500)" id="calories" name="calories" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; padding: 10px;  color: #fff; border: none; border-radius: 5px; font-size: 16px;">Add Meal</button>
+    </form>
+    <div id="mealList" style="margin-top: 20px;">
+        <h3 style="text-align: center; color: #333;">Total Chalories</h3>
+        <ul id="meals" style="list-style-type: none; padding: 0;">
+        </ul>
+    </div>
+    <div id="totalCalories" style="margin-top: 20px; text-align: center; font-size: 18px; color: #333;"></div>
+</div>
+<br><br>
+</div>
+
+<script>
+    let totalCalories = 0;
+
+    function addMeal(event) {
+        event.preventDefault();
+        const mealInput = document.getElementById('meal');
+        const caloriesInput = document.getElementById('calories');
+
+        const meal = mealInput.value;
+        const calories = parseInt(caloriesInput.value);
+
+        if (isNaN(calories)) {
+            alert('Please enter a valid number of calories.');
+            return;
+        }
+
+        totalCalories += calories;
+
+        const mealList = document.getElementById('meals');
+        const listItem = document.createElement('li');
+        listItem.textContent = `${meal} - ${calories} calories`;
+        listItem.style.margin = '10px 0';
+        listItem.style.padding = '10px';
+        listItem.style.border = '1px solid #ddd';
+        listItem.style.borderRadius = '5px';
+        mealList.appendChild(listItem);
+
+        document.getElementById('totalCalories').textContent = `Total Calories: ${totalCalories}`;
+
+        mealInput.value = '';
+        caloriesInput.value = '';
+    }
+</script>
+{% endblock 'main' %}

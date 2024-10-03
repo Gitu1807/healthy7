@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+		
+		<!-- Start Blog Area -->
+		<section class="blog section" id="blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title">
+							<h2>Keep up with Our Most Recent Medical News.</h2>
+							<img src=" {% static 'img/section-img.png' %}" alt="#">
+							<p>Stay informed, stay healthy.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-6 col-12">
+						<!-- Single Blog -->
+						<div class="single-news">
+							<div class="news-head">
+								<img src="{% static 'img/blog1.jpg' %}" alt="#">
+							</div>
+							<div class="news-body">
+								<div class="news-content">
+									<div class="date">22 May, 2024</div>
+									<h2><a href="#">Blood Pressure Medications Linked to Eczema</a></h2>
+									<p class="text">A study published in May 2024 reported that certain blood pressure medications, particularly diuretics and calcium channel blockers, might increase the risk of developing eczema, while ACE inhibitors and beta-blockers pose a lower risk​ .</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Blog -->
+					</div>
+					<div class="col-lg-4 col-md-6 col-12">
+						<!-- Single Blog -->
+						<div class="single-news">
+							<div class="news-head">
+								<img src="{% static 'img/blog2.jpg' %}" alt="#">
+							</div>
+							<div class="news-body">
+								<div class="news-content">
+									<div class="date">31 May, 2024</div>
+									<h2><a href="#">TUltra-Processed Food Can Raise Risk of Cognitive Decline and Stroke:</a></h2>
+									<p class="text">ew research has linked high consumption of ultra-processed foods to an increased risk of stroke and cognitive decline. The findings advocate for diets rich in unprocessed foods to support better brain health and reduce stroke risk​.</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Blog -->
+					</div>
+					<div class="col-lg-4 col-md-6 col-12">
+						<!-- Single Blog -->
+						<div class="single-news">
+							<div class="news-head">
+								<img src="{% static 'img/blog3.jpg' %}" alt="#">
+							</div>
+							<div class="news-body">
+								<div class="news-content">
+									<div class="date">05 June, 2024</div>
+									<h2><a href="#">Biking May Reduce the Risk of Knee Pain and Arthritis:</a></h2>
+									<p class="text">A recent study found that regular biking at any point in life is linked to a lower risk of knee pain and arthritis in the knee joints. This research highlights the potential long-term benefits of incorporating biking into your exercise routine​.</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Blog -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Blog Area -->
+
+        {% endblock 'main' %}

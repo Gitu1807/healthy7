@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div style="background-image: url('https://images.pexels.com/photos/3682240/pexels-photo-3682240.jpeg');background-size: cover; background-position: center; padding: 50px 0;">
+    <div style="max-width: 800px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+        <h2 style="text-align: center; color: #333;">Sleep Assessment</h2>
+        <form id="sleepForm">
+            <div style="margin-bottom: 15px;">
+                <label for="age" style="display: block; margin-bottom: 5px; color: #555;">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age (e.g., 25)" name="age" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <label for="gender" style="margin-right: 20px; color: #555;"> Gender</label>
+                <select id="gender" name="gender" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                </select>
+                <label for="wakeFeeling" style="margin-left: 20px; color: #555;"> Feeling Upon Waking:</label>
+                <select id="wakeFeeling" name="wakeFeeling" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Feeling</option>
+                    <option value="refreshed">Refreshed</option>
+                    <option value="okay">Okay</option>
+                    <option value="tired">Tired</option>
+                    <option value="exhausted">Exhausted</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="sleepHours" style="display: block; margin-bottom: 5px; color: #555;">Average Sleep Hours per Night:</label>
+                <input type="number" id="sleepHours" placeholder="Enter your average sleep hours per night (e.g., 8)" name="sleepHours" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <label for="sleepQuality" style="margin-right: 20px; color: #555;"> Quality of Sleep:</label>
+                <select id="sleepQuality" name="sleepQuality" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Quality</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="poor">Poor</option>
+                </select>
+                <label for="difficulty" style="margin-left: 20px; color: #555;"> Difficulty Falling Asleep:</label>
+                <select id="difficulty" name="difficulty" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select Difficulty</option>
+                    <option value="never">Never</option>
+                    <option value="sometimes">Sometimes</option>
+                    <option value="often">Often</option>
+                    <option value="always">Always</option>
+                </select>
+            </div>
+            
+            <button type="button" class="btn" onclick="analyzeSleep()" style="display: block; width: 100%; padding: 10px; color: #fff; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Analyze</button>
+        </form>
+        <div id="result" style="display:none; margin-top: 20px; padding: 15px; border-radius: 5px;  color: #333;"></div>
+    </div>
+</div>
+    <script>
+        function analyzeSleep() {
+            var age = document.getElementById('age').value;
+            var gender = document.getElementById('gender').value;
+            var sleepHours = document.getElementById('sleepHours').value;
+            var sleepQuality = document.getElementById('sleepQuality').value;
+            var difficulty = document.getElementById('difficulty').value;
+            var wakeFeeling = document.getElementById('wakeFeeling').value;
+
+            var sleepAnalysis = "Based on your responses:";
+
+            sleepAnalysis += "<br><br> - You are " + age + " years old and " + gender + ".";
+            sleepAnalysis += "<br> - You get an average of " + sleepHours + " hours of sleep per night.";
+            sleepAnalysis += "<br> - Your sleep quality is " + sleepQuality + ".";
+            sleepAnalysis += "<br> - You " + difficulty.toLowerCase() + " have difficulty falling asleep.";
+            sleepAnalysis += "<br> - You wake up feeling " + wakeFeeling + ".";
+
+            if (sleepHours < 7) {
+                sleepAnalysis += "<br><br><strong>Recommendation:</strong> Try to get at least 7-9 hours of sleep for better health.";
+            } else if (sleepQuality === "poor" || difficulty === "often" || difficulty === "always" || wakeFeeling === "tired" || wakeFeeling === "exhausted") {
+                sleepAnalysis += "<br><br><strong>Recommendation:</strong> Consider improving your sleep environment or habits. If issues persist, consult a healthcare professional.";
+            } else {
+                sleepAnalysis += "<br><br><strong>Great job!</strong> You seem to have a healthy sleep pattern.";
+            }
+
+            var result = document.getElementById('result');
+            result.innerHTML = '<h3 style="margin-bottom: 10px;">Sleep Analysis Result</h3>' + sleepAnalysis;
+            result.style.display = 'block';
+        }
+    </script>
+{% endblock 'main' %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+    <div class="row">
+        {% for x in data %}
+        <div class="col-4 mt-5">
+            <div class="p-2">
+                <br><br><img src="{{x.meds_image.url}}" class="card-img-top">
+                <div class="text-center">
+                  <h1>{{x.tname}}</h1>
+                </div>
+              </div>
+        </div>
+        <div class="col-7 mt-5">
+            <br><br><h1 class="mb-3">Meal Contain:</h1>
+            <h4>{{x.details}}</h4>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-primary" href="/meds">Back</a>
+          </div>
+        {% endfor %}
+    </div>
+    
+{% endblock 'main' %}

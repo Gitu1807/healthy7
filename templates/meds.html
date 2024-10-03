@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100 " src="{% static 'img/meds3.jpg' %}" alt="Image" >
+                    <div class="carousel-caption text-center">
+                        <div class="container">
+                            <div class="row justify-content-center text-align">
+
+                                    <a href="#" style="margin-right: 200px;"><h2 class="m-0"><span class="text-decoration-color" style="color: aliceblue;"><b><i>Health & Wellness</i></span>Products</b></h2></a>
+                                    <form class="d-flex" method="get" action="/search">
+                                        <input class="form-control me-2" type="search" placeholder="Search Product" aria-label="Search" name="query" style="margin-right: 10px; border-radius: 5px;">
+                                        <button class="btn btn-primary" style=" color: white; border-radius: 5px;" type="submit">Search</button>
+                                      </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Start -->
+
+    <div class="container-xxl py-5" >
+        <div class="container">
+            <div style="padding: 0px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; gap: 0px; align-items: end; position: absolute; right: 50px;">
+            <div>
+                <select onchange="location = this.value;" style="padding: 10px; border-radius: 15px; border: 1px solid #ddd; align-items: end;">
+                    <option value="">Search by Category</option>
+                    <option value="catfilter/1">Personal Care</option>
+                    <option value="catfilter/2">Health Care Devices</option>
+                    <option value="catfilter/3">Skin Care</option>
+                    <option value="catfilter/4">Fitness Supplement</option>
+                    <option value="catfilter/5">Ayurvedic Care</option>
+                    <option value="catfilter/6">Health Care</option>
+                </select>
+            </div>
+            <div>
+                <select onchange="location = this.value;" style="padding: 10px; border-radius: 15px; border: 1px solid #ddd; align-items: end;">
+                    <option value="">Sort by Price</option>
+                    <option value="sortbyprice/1">Low to High</option>
+                    <option value="sortbyprice/2">High to Low</option>
+                </select>
+            </div>
+        </div>
+            </div>
+        </div>
+        <!--start ticket-->
+            <div class="tab-content" >
+                    <div class="container py-5">
+                <div id="tab-1" class="tab-pane fade show p-0 active" >
+                    <div class="row g-4">
+                            <div class="row justify-content-around ">
+                                {% for x in data %}
+                                <div style="border: 1px solid #ddd; border-radius: 5px; padding: 20px; margin: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 250px; display: inline-block;">
+                                    <img src="{{ x.cimage.url}}" alt="Medicine Image" style="width: 100 px; height: 150px; border-radius: 5px;" >
+                                    <div style="font-size: 1.5em; margin: 15px 0;">{{ x.name|truncatechars:20 }}</div>
+                                    <div style="font-size: 1.2em; color: #28a745; margin-bottom: 15px;">₹ {{x.price}}</div>
+                                    <div style="display: flex; justify-content: center; gap: 10px;">
+                                        <button class="btn" style=" color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;"><a href="/medsdetail/{{x.id}}">View Details</a></button>
+                                        <button class="btn primary"  style=" color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;"><a href="/addtocart/{{x.id}}">Add to Cart</a></button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+{% endblock 'main' %}
